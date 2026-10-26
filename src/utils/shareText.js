@@ -1,7 +1,7 @@
 import { formatMoney } from "./money";
 
 export function buildShareText({
-  title, date, bill, transfers, people, payerId, currency, taxPercent, tipPercent,
+  title, date, bill, transfers, people, payerId, currency, taxPercent, tipPercent, appUrl,
 }) {
   const money = (n) => formatMoney(n, currency);
   const nameOf = (id) => people.find((p) => p.id === id)?.name ?? "?";
@@ -36,6 +36,6 @@ export function buildShareText({
   }
 
   lines.push("");
-  lines.push("Split with Bill Splitter");
+  lines.push("Split with Bill Splitter" + (appUrl ? " - " + appUrl : ""));
   return lines.join("\n");
 }

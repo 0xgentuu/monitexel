@@ -39,6 +39,11 @@ export default function App() {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
+  useEffect(() => {
+    document.body.style.overflow = toolsOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [toolsOpen]);
+
   const closeTools = useCallback(() => setToolsOpen(false), []);
 
   const bill = useMemo(

@@ -585,3 +585,43 @@ button.ghost.big { padding: 0.65rem 1rem; font-size: 1rem; }
 
 /* ---------- Backup ---------- */
 .backup-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+/* ---------- Mobile pass ---------- */
+html { -webkit-text-size-adjust: 100%; }
+button { touch-action: manipulation; }
+
+/* keep content clear of the iPhone home bar */
+.app { padding-bottom: calc(3rem + env(safe-area-inset-bottom)); }
+.side-body { padding-bottom: calc(1rem + env(safe-area-inset-bottom)); }
+
+/* grid children may shrink, so long content can wrap instead of overflowing */
+.app > * { min-width: 0; }
+
+/* long names and big numbers never break the layout */
+.people li { max-width: 100%; overflow-wrap: anywhere; }
+.item-main strong,
+.person-head strong,
+.transfers strong { min-width: 0; overflow-wrap: anywhere; }
+.price, .person-total, .h-total { white-space: nowrap; }
+
+@media (max-width: 420px) {
+  h1 { font-size: 1.5rem; }
+
+  /* name on its own row, price and Remove underneath */
+  .items li { grid-template-columns: 1fr auto; }
+  .items li .item-main { grid-column: 1 / -1; }
+}
+
+/* bigger tap targets on touch screens only */
+@media (pointer: coarse) {
+  button.ghost { min-height: 40px; padding: 0.5rem 0.9rem; }
+  .people li button { width: 2.25rem; height: 2.25rem; }
+  .tab { min-height: 44px; }
+  input:not([type="checkbox"]), select { min-height: 44px; }
+  fieldset label { padding: 0.5rem 0.9rem; }
+  .key { padding: 1rem 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
